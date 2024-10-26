@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 const AddTransaction = (props) => {
   const [record, setRecord] = useState({});
+  ///To handle change in text and amount
   function handleChange(event) {
     const input = event.target.id;
     const amount = event.target.value;
@@ -11,13 +12,21 @@ const AddTransaction = (props) => {
       return {
         ...prevRecord,
         [input]: input === "amount" ? Number(amount) : String(amount),
+        ///if change is in text, text object is updated
+        ///else amount is updated using ternary operator
       };
     });
   }
-  function handleSubmit(event){
+  ///To handle button click
+  function handleSubmit(event) {
+    ///To prevent page reloading when submit button is clicked
     event.preventDefault();
     //console.log(record);
-    {props.addFunction(record)}
+
+    ///Calling add item function in App.js
+    {
+      props.addFunction(record);
+    }
   }
   return (
     <div>
@@ -44,7 +53,9 @@ const AddTransaction = (props) => {
             placeholder="Enter amount..."
           />
         </div>
-        <button className="btn" onClick={handleSubmit}>Add transaction</button>
+        <button className="btn" onClick={handleSubmit}>
+          Add transaction
+        </button>
       </form>
     </div>
   );
