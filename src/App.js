@@ -12,20 +12,24 @@ function App() {
     expense: 0,
     history: [
       {
-        text: "",
-        Amount: 0,
-      },
+      }
     ],
   });
-  
+  function addRecord(item){
+    console.log(item);
+    setobj(...obj)
+  }
+  function deleRecard(id){
+
+  }
   return (
     <div className="App">
       <Header />
       <div class="container">
-        <Balance />
-        <IncomeExpense income={0.0} expense={0.0} />
-        <TransactionList />
-        <AddTransaction />
+        <Balance balance={obj.balance}/>
+        <IncomeExpense income={obj.income} expense={obj.expense} />
+        <TransactionList list={obj.history}/>
+        <AddTransaction addFunction={addRecord}/>
       </div>
     </div>
   );
