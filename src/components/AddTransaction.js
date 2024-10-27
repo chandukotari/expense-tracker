@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
 const AddTransaction = (props) => {
-  const [record, setRecord] = useState({});
+  const [record, setRecord] = useState({
+    text: "",
+    amount: "",
+  });
   ///To handle change in text and amount
   function handleChange(event) {
     const input = event.target.id;
@@ -24,9 +27,24 @@ const AddTransaction = (props) => {
     //console.log(record);
 
     ///Calling add item function in App.js
-    {
+    if (record.amount != 0 && record.text != ""&& isOnlySpace(record.text)!=true) {
       props.addFunction(record);
+      
     }
+    setRecord({
+      text: "",
+      amount: "",
+    });
+  }
+  function isOnlySpace(text) {
+    var onlySpace = true;
+    for (var i = 0; i < text.length&&onlySpace; i++) {
+      if(text[i]!=" ")
+      {
+        onlySpace=false
+      }
+    }
+    return onlySpace
   }
   return (
     <div>
@@ -39,6 +57,7 @@ const AddTransaction = (props) => {
             id="text"
             onChange={handleChange}
             placeholder="Enter text..."
+            value={record.text}
           />
         </div>
         <div className="form-control">
@@ -50,7 +69,8 @@ const AddTransaction = (props) => {
             type="number"
             id="amount"
             onChange={handleChange}
-            placeholder="Enter amount..."
+            placeholder={"Enter amount..."}
+            value={record.amount}
           />
         </div>
         <button className="btn" onClick={handleSubmit}>
